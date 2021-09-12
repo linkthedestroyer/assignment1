@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block name %}Clients{% endblock name %}
+
+{% block content %}
+<table style="border-collapse: separate; border-spacing: 10px;">
+    <thead>
+        <tr>
+            <th>Client</th>
+            <th>Account #</th>
+            <th>Phone #</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Zip Code</th>
+            <th>Email</th>
+            <th>Sale Rep</th>
+            <th>Vehicles</th>
+            <th>Options</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for client in object_list %}
+        <tr>
+            <td><a href="{% url 'client_detail' client.pk %}">{{ client.name }}</a></td>
+            <td>{{ client.acct_number }}</td>
+            <td>{{ client.cell_phone }}</td>
+            <td>{{ client.address }}</td>
+            <td>{{ client.city }}</td>
+            <td>{{ client.state }}</td>
+            <td>{{ client.zipcode }}</td>
+            <td>{{ client.email }}</td>
+            <td>{{ client.author }}</td>
+            <td><a href="{% url 'vehicle_list' client.pk %}">Fleet ({{ client.vehicle_count }})</a></td>
+            <td>
+                <a href="{% url 'client_edit' client.pk %}">Edit</a> |
+                <a href="{% url 'client_delete' client.pk %}">Delete</a>
+            </td>
+        </tr>
+        {% for comment in client.comments.all %}
+        <tr>
+            <td colspan="11">
+                <span class="font-weight-bold">{{ comment.author }} &middot;</span>
+                {{ comment }}
+            </td>
+        </tr>
+        {% endfor %}
+        {% endfor %}
+    </tbody>
+</table>
+<!--
+{% for client in object_list %}
+<div class="card">
+    <div class="card-header" onclick="location.href='{% url 'client_detail' client.pk %}'">
+        <span class="font-weight-bold">Client: {{ client.name }} | Account #: {{ client.acct_number }} |</span>
+
+    </div>
+    <div class="card-body">
+        <table></table>
+        <span class="font-weight-bold">cell: {{ client.cell_phone }} | </span>
+        <span class="font-weight-bold">acct: {{ client.acct_number }} | </span>
+
+        <span class="font-muted">addr: {{ client.address }} | </span>
+        <span class="font-muted-">city: {{ client.city }} | </span>
+        <span class="font-muted">st: {{ client.state }} | </span>
+        <span class="font-muted">zip: {{ client.zipcode }} | </span>
+        <span class="font-muted">email: {{ client.email }} | </span>
+        <span class="font-muted">user: {{ client.author }} | </span>
+        <p>{{ client.notes }}</p>
+        <a href="{% url 'client_edit' client.pk %}">Edit</a> |
+        <a href="{% url 'client_delete' client.pk %}">Delete</a>
+    </div>
+    <div class="card-footer">
+        {% for comment in client.comments.all %}
+        <p>
+            <span class="font-weight-bold">{{ comment.author }} &middot;</span>
+            {{ comment }}
+        </p>
+        {% endfor %}
+    </div>
+</div>
+<br />
+{% endfor %}-->
+{% endblock content %}

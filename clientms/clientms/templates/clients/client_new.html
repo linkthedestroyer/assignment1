@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block name %} New client {% endblock name %}
+
+{% block content %}
+    <h1>New Client</h1>
+    <form action="" method="post">{% csrf_token %}
+      <table>
+        {{ form.as_table }}
+      </table>
+      <button class="btn btn-success ml-2" type="submit">Save</button>
+    </form>
+{% endblock content %}

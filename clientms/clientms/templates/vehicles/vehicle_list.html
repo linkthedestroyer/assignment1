@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block name %}Clients{% endblock name %}
+
+{% block content %}
+<table style="border-collapse: separate; border-spacing: 10px;">
+    <thead>
+        <tr>
+            <th>Make</th>
+            <th>Model</th>
+            <th>VIN #</th>
+            <th>Date of purchase</th>
+            <th>Date of last service</th>
+            <th>Client</th>
+            <th>Sale Rep</th>
+            <th>Options</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for vehicle in object_list %}
+        <tr>
+            <td><a href="{% url 'vehicle_detail' vehicle.pk %}">{{ vehicle.make }}</a></td>
+            <td>{{ vehicle.model }}</td>
+            <td>{{ vehicle.VIN_number }}</td>
+            <td>{{ vehicle.date_of_purchase }}</td>
+            <td>{{ vehicle.date_of_last_service }}</td>
+            <td>{{ vehicle.client.name }} | {{vehicle.client.acct_number}}</td>
+            <td>{{ vehicle.author }}</td>
+            <td>{{ vehicle.email }}</td>
+            <td>{{ vehicle.author }}</td>
+            <td>
+                <a href="{% url 'vehicle_edit' vehicle.pk %}">Edit</a> |
+                <a href="{% url 'vehicle_delete' vehicle.pk %}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="8"><a href="{% url 'vehicle_new' view.kwargs.clientId %}">Add vehicle</a></td>
+        </tr>
+    </tbody>
+</table>
+{% endblock content %}

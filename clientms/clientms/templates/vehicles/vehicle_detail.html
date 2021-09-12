@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block name %} Vehicle details {% endblock name %}
+{% block content %}
+<table style="border-collapse: separate; border-spacing: 15px;">
+  <tbody>
+    <tr>
+      <th>Make</th>
+      <td>{{ vehicle.make }}</td>
+    </tr>
+    <tr>
+      <th>Model</th>
+      <td>{{ vehicle.model }}</td>
+    </tr>
+    <tr>
+      <th>VIN #</th>
+      <td>{{ vehicle.VIN_number }}</td>
+    </tr>
+    <tr>
+      <th>Date of purchase</th>
+      <td>{{ vehicle.date_of_purchase }}</td>
+    </tr>
+    <tr>
+      <th>Date of last service</th>
+      <td>{{ vehicle.date_of_last_service }}</td>
+    </tr>
+    <tr>
+      <th>Client</th>
+      <td>{{ vehicle.client.name }} | {{vehicle.client.acct_number}}</td>
+    </tr>
+    <tr>
+      <th>Sale Rep</th>
+      <td>{{ vehicle.author }}</td>
+    </tr>
+    <tr>
+      <th>Options</th>
+      <td>
+        <a href="{% url 'vehicle_edit' vehicle.pk %}">Edit</a> |
+        <a href="{% url 'vehicle_delete' vehicle.pk %}">Delete</a>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        Back to <a href="{% url 'vehicle_list' object.client.pk %}">All Vehicles</a>.
+      </td>
+    </tr>
+  </tbody>
+</table>
+{% endblock content %}
