@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block name %}Home{% endblock name %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-4">User does not have premissions to access this data</h1>
+    <p class="lead">
+        <a class="btn btn-primary btn-lg" href="{% url 'client_list' %}" role="button">View All Clients</a>
+    </p>
+</div>
+{% endblock content %}

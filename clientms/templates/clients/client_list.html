@@ -3,7 +3,7 @@
 {% block name %}Clients{% endblock name %}
 
 {% block content %}
-<table style="border-collapse: separate; border-spacing: 10px;">
+<table style="margin: 0 auto; border-collapse: separate; border-spacing: 10px;">
     <thead>
         <tr>
             <th>Client</th>
@@ -37,7 +37,7 @@
                 <a href="{% url 'client_delete' client.pk %}">Delete</a>
             </td>
         </tr>
-        {% for comment in client.comments.all %}
+        {% for comment in client.comments.latest('id').all %}
         <tr>
             <td colspan="11">
                 <span class="font-weight-bold">{{ comment.author }} &middot;</span>

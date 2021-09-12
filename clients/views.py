@@ -28,7 +28,7 @@ class ClientDetailView(UserPassesTestMixin, LoginRequiredMixin, DetailView):
     login_url = "login"
 
     def test_func(self):
-        return self.request.user.id == Client.objects.get(pk=self.kwargs["pk"]).id
+        return self.request.user.id == Client.objects.get(pk=self.kwargs["pk"]).author.id
 
 
 class ClientUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
@@ -41,7 +41,7 @@ class ClientUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
 
     def test_func(self):
-        return self.request.user.id == Client.objects.get(pk=self.kwargs["pk"]).id
+        return self.request.user.id == Client.objects.get(pk=self.kwargs["pk"]).author.id
 
 
 class ClientDeleteView(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
@@ -50,7 +50,7 @@ class ClientDeleteView(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy("client_list")
 
     def test_func(self):
-        return self.request.user.id == Client.objects.get(pk=self.kwargs["pk"]).id
+        return self.request.user.id == Client.objects.get(pk=self.kwargs["pk"]).author.id
 
 
 class ClientCreateView(LoginRequiredMixin, CreateView):
@@ -76,4 +76,4 @@ class CommentCreateView(UserPassesTestMixin, LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
     def test_func(self):
-        return self.request.user.id == Client.objects.get(pk=self.kwargs["pk"]).id
+        return self.request.user.id == Client.objects.get(pk=self.kwargs["pk"]).author.id

@@ -3,7 +3,7 @@
 {% block name %}Clients{% endblock name %}
 
 {% block content %}
-<table style="border-collapse: separate; border-spacing: 10px;">
+<table style="margin: 0 auto; border-collapse: separate; border-spacing: 10px;">
     <thead>
         <tr>
             <th>Make</th>
@@ -25,8 +25,6 @@
             <td>{{ vehicle.date_of_purchase }}</td>
             <td>{{ vehicle.date_of_last_service }}</td>
             <td>{{ vehicle.client.name }} | {{vehicle.client.acct_number}}</td>
-            <td>{{ vehicle.author }}</td>
-            <td>{{ vehicle.email }}</td>
             <td>{{ vehicle.author }}</td>
             <td>
                 <a href="{% url 'vehicle_edit' vehicle.pk %}">Edit</a> |
